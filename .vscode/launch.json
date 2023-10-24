@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": ["5", "200", "200", "200"],
+      "cwd": "/Users/Axel/Desktop/Ecole_42/philo",
+      "program": "/Users/Axel/Desktop/Ecole_42/philo/philo"
+    }
+  ]
+}
