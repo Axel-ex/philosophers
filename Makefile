@@ -6,7 +6,7 @@ OBJ_DIR		=	obj
 
 OBJ			=	$(patsubst srcs/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
-FLAGS		=	-Wall -Wextra -Werror -g
+FLAGS		=	-Wall -Wextra -Werror -g -pthread
 
 INC			=	includes
 
