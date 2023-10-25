@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:28:03 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/24 14:47:53 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:05:45 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static	bool	start_routine(t_prog *p)
 {
 	int	i;
 
+	p->start = get_time();
 	i = 0;
 	while (i < p->nb_philos)
 	{
@@ -24,24 +25,10 @@ static	bool	start_routine(t_prog *p)
 			return (false);
 		i++;
 	}
+	if (pthread_create(&p->monitor, NULL, monitor, p))
+		return (false);
+	//if (p->nb_philo != 1)
 	return (true);
-}
-
-int	join_threads(t_prog *p)
-{
-	int	i;
-
-	i = 0;
-	while (i < p->nb_philos)
-	{
-		if (pthread_join(p->philos[i]->thread, NULL))
-		{
-			printf("failed to join.\n");
-			return (-1);
-		}
-		i++;
-	}
-	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -55,5 +42,5 @@ int	main(int argc, char **argv)
 		return (-1);
 	if (!start_routine(p))
 		return (-1);
-	join_threads(p);
+	exit_program(p);
 }

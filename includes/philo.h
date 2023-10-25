@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:12:02 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/24 14:31:57 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:22:36 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <pthread.h>
-# include <time.h>
+# include <sys/time.h>
 
 typedef struct s_prog	t_prog;
 
@@ -45,6 +45,7 @@ typedef struct s_prog
 	pthread_mutex_t	stop_m;
 	pthread_mutex_t	write_m;
 	pthread_mutex_t	*forks;
+	pthread_t		monitor;
 	t_philo			**philos;
 }	t_prog;
 
@@ -60,6 +61,16 @@ void	*routine(void *data);
 //INIT
 t_prog	*init_program(int argc, char **argv);
 
+//MONITOR
+void	*monitor(void *data);
 
+//UTILS
+long int	get_time(void);
+void		ft_usleep(long int time_in_ms);
+void		write_message(t_philo *philo, char *s);
+
+void	exit_program(t_prog	*p);
+
+bool	is_finished(t_prog *p);
 
 #endif

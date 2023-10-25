@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:30 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/24 14:48:10 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:27:52 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	*routine(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
-	printf("hello from philo %d\n", philo->id);
+	if (philo->id % 2 != 0)
+		ft_usleep(philo->p->time_to_sleep);
+	while (!is_finished(philo->p))
+	{
+		write_message(philo, "is in routine...\n");
+	}
 	return (NULL);
 }

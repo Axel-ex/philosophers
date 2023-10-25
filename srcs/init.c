@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:34:42 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/24 14:46:01 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:01:04 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ static t_philo	**init_philos(t_prog *p)
 	t_philo	**philos;
 	int		i;
 
-
-	philos = malloc(sizeof(t_philo) * p->nb_philos);
+	philos = (t_philo **)malloc(sizeof(t_philo *) * p->nb_philos);
 	if (!philos)
 		return (NULL);
 	i = 0;
@@ -102,5 +101,3 @@ t_prog	*init_program(int argc, char **argv)
 		return (NULL);
 	return (p);
 }
-
-
