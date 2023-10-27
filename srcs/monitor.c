@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:34:21 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/27 10:56:14 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:52:15 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ void	is_dead(t_prog *p)
 		elapsed = curr_time - p->philos[i].last_meal;
 		if (elapsed > p->time_to_die)
 		{
-			pthread_mutex_lock(&p->write_m);
-			write_message(&p->philos[i], "has died");
-			pthread_mutex_unlock(&p->write_m);
+			write_status(&p->philos[i], DIED, DEBUG);
 			set_finished_flag(p, true);
 		}
 	}
@@ -76,10 +74,8 @@ void	*monitor(void *data)
 	if (p->nb_meal == 0)
 		return (NULL);
 	//wait for threads
-	while (true)
+	while (!is_finished(p))
 	{
-		if (is_finished(p))
-			break ;
 		is_dead(p);
 		all_full(p);
 	}

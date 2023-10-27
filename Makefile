@@ -6,7 +6,12 @@ OBJ_DIR		=	obj
 
 OBJ			=	$(patsubst srcs/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
-FLAGS		=	-Wall -Wextra -Werror -g -pthread
+FLAGS		=	-Wall -Wextra -Werror -pthread
+
+MODE		= none
+ifeq ($(MODE), debug)
+	FLAGS += -fsanitize=thread -g -D DEBUG=1
+endif
 
 INC			=	includes
 

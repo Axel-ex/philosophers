@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:12:02 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/27 11:56:17 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:48:36 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,26 @@
 # include <stdbool.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+# define NC		"\e[0m"
+# define RED	"\e[31m"
+# define GREEN	"\e[32m"
+# define PURPLE	"\e[35m"
+# define CYAN	"\e[36m"
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
+
+typedef enum s_status
+{
+	FORK1,
+	FORK2,
+	EAT,
+	SLEEP,
+	THINK,
+	DIED,
+}	t_status;
 
 typedef enum s_fork
 {
@@ -33,7 +53,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				id;
 	int				time_ate;
-	pthread_mutex_t	fork[2];
+	int				fork[2];
 	pthread_mutex_t	meal_lock;
 	time_t			last_meal;
 	t_prog			*p;
@@ -60,10 +80,9 @@ int			parse_argv(int argc, char **argv);
 
 //UTILS.C
 int			ft_atoi(char *s);
-int			ft_strcmp(char *s1, char *s2);
 long		get_time(void);
 void		ft_usleep(long int time_in_ms);
-void		write_message(t_philo *philo, char *s);
+void		write_status(t_philo *philo, t_status status, int debug);
 
 //ROUTINE
 void		*routine(void *data);
@@ -78,6 +97,9 @@ void		*monitor(void *data);
 void		exit_program(t_prog	*p);
 int			error_message(char *msg);
 
+
 bool		is_finished(t_prog *p);
+//DEBUG.C
+void		write_status_debug(t_philo *philo, t_status status, char *msg);
 
 #endif

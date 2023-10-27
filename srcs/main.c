@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:28:03 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/27 12:10:41 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 17:14:29 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static	bool	start_routine(t_prog *p)
 		if (pthread_create(&p->philos[i].thread, NULL,
 				routine, &p->philos[i]))
 			return (false);
+		p->philos[i].last_meal = p->start;
 		i++;
 	}
 	if (pthread_create(&p->monitor, NULL, monitor, p))
 		return (false);
-	//if (p->nb_philo != 1)
 	return (true);
 }
 

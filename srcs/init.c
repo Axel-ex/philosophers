@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:34:42 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/27 12:15:17 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 17:02:58 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@ static pthread_mutex_t	*init_forks(t_prog *p)
 	return (forks);
 }
 
-static void	assign_forks(t_philo *philo)
+static void	assign_forks(t_philo *philo, int index)
 {
-	philo->fork[LEFT] = philo->p->forks[philo->id];
-	philo->fork[RIGHT] = philo->p->forks[(philo->id + 1) / philo->p->nb_philos];
+	philo->fork[LEFT] = philo->id - 1;
+	if (index == philo->p->nb_philos - 1)
+		philo->fork[RIGHT] = 0;
+	else
+		philo->fork[RIGHT] = philo->id;
 }
 
 static t_philo	*init_philos(t_prog *p)
@@ -49,14 +52,14 @@ static t_philo	*init_philos(t_prog *p)
 	{
 		if (pthread_mutex_init(&philos[i].meal_lock, NULL))
 		{
-			error_message("failed to init meal mutexphilos.");
+			error_message("failed to init meal mutexes.");
 			return (NULL);
 		}
 		philos[i].id = i + 1;
 		philos[i].last_meal = 0;
 		philos[i].time_ate = 0;
 		philos[i].p = p;
-		assign_forks(&philos[i]);
+		assign_forks(&philos[i], i);
 		i++;
 	}
 	return (philos);
