@@ -3,11 +3,22 @@
   "configurations": [
     {
       "name": "C/C++ Runner: Debug Session",
-      "type": "lldb",
+      "type": "cppdbg",
       "request": "launch",
-      "args": ["5", "200", "200", "200"],
-      "cwd": "/Users/Axel/Desktop/Ecole_42/philo",
-      "program": "/Users/Axel/Desktop/Ecole_42/philo/philo"
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/nfs/homes/achabrer/Desktop/projects/philo/srcs",
+      "program": "/nfs/homes/achabrer/Desktop/projects/philo/srcs/build/Debug/outDebug",
+      "MIMode": "lldb",
+      "miDebuggerPath": "lldb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
     }
   ]
 }
