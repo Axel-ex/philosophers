@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 10:45:45 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/24 13:32:37 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:48:52 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,10 @@ static bool	is_non_zero(int argc, char **argv)
 int	parse_argv(int argc, char **argv)
 {
 	if (argc < 5)
-	{
-		printf("Enter a valid number of arguments.\n");
-		return (-1);
-	}
+		return (error_message("Enter valid number of arguments\n"));
 	if (!is_valid(argc, argv))
-	{
-		printf("Enter positive numeric arguments.\n");
-		return (-1);
-	}
+		return (error_message("Enter positive numeric arguments.\n"));
 	if (!is_non_zero(argc, argv))
-	{
-		printf("Enter non-zero arguments.\n");
-		return (-1);
-	}
+		return (error_message("Enter non-zero arguments.\n"));
 	return (0);
 }

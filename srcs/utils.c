@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:43:41 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/27 17:10:30 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:45:08 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_usleep(long int time_in_ms)
 		usleep(time_in_ms / 10);
 }
 
-void	write_status(t_philo *philo, t_status status, int debug)
+void	write_status(t_philo *philo, t_status status, bool debug)
 {
 	long int	curr_time;
 	char		*msg;

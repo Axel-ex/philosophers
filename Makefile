@@ -10,7 +10,7 @@ FLAGS		=	-Wall -Wextra -Werror -pthread
 
 MODE		= none
 ifeq ($(MODE), debug)
-	FLAGS += -fsanitize=thread -g -D DEBUG=1
+	FLAGS += -fsanitize=thread -g -D DEBUG=true
 endif
 
 INC			=	includes

@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:02:03 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/27 14:48:15 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:53:54 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	error_message(char *msg)
 {
-	printf("Error: %s\n", msg);
+	printf("%sError:%s %s\n", RED, NC, msg);
 	return (EXIT_FAILURE);
 }
 

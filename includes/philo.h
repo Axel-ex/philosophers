@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:12:02 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/27 16:48:36 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:53:07 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@
 # define CYAN	"\e[36m"
 
 # ifndef DEBUG
-#  define DEBUG 0
+#  define DEBUG false
 # endif
+
+# define STD_ERR_USAGE "Usage: <number of philo> <time to die> <time to sleep>\
+ <time to think> <<optional> nb of meal>"
 
 typedef enum s_status
 {
@@ -82,7 +85,7 @@ int			parse_argv(int argc, char **argv);
 int			ft_atoi(char *s);
 long		get_time(void);
 void		ft_usleep(long int time_in_ms);
-void		write_status(t_philo *philo, t_status status, int debug);
+void		write_status(t_philo *philo, t_status status, bool debug);
 
 //ROUTINE
 void		*routine(void *data);

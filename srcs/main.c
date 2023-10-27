@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:28:03 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/27 17:14:29 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:52:18 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	t_prog	*p;
 
 	if (parse_argv(argc, argv))
-		return (EXIT_FAILURE);
+		return (error_message(STD_ERR_USAGE));
 	p = init_program(argc, argv);
 	if (!p)
 		return (error_message("Program initialization failed"));
