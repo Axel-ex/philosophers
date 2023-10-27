@@ -6,11 +6,17 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:30 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/24 22:27:52 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 12:12:23 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+// void	eat(t_philo *philo)
+// {
+// 	pthread_mutex_lock(philo->fork[LEFT]);
+
+// }
 
 void	*routine(void *data)
 {

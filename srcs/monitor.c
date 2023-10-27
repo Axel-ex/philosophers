@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:34:21 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/24 22:28:49 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 10:56:14 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	is_dead(t_prog *p)
 	curr_time = get_time();
 	while (++i < p->nb_philos)
 	{
-		elapsed = curr_time - p->philos[i]->last_meal;
+		elapsed = curr_time - p->philos[i].last_meal;
 		if (elapsed > p->time_to_die)
 		{
 			pthread_mutex_lock(&p->write_m);
-			write_message(p->philos[i], "has died");
+			write_message(&p->philos[i], "has died");
 			pthread_mutex_unlock(&p->write_m);
 			set_finished_flag(p, true);
 		}
@@ -61,7 +61,7 @@ void	all_full(t_prog *p)
 	all_full = true;
 	while (++i < p->nb_philos)
 	{
-		if (p->philos[i]->time_ate < p->nb_meal)
+		if (p->philos[i].time_ate < p->nb_meal)
 			all_full = false;
 	}
 	if (all_full)

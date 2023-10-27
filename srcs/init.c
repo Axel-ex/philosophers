@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:34:42 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/24 22:01:04 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 12:15:17 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,36 +32,31 @@ static pthread_mutex_t	*init_forks(t_prog *p)
 
 static void	assign_forks(t_philo *philo)
 {
-	philo->fork[0] = philo->id;
-	philo->fork[1] = (philo->id + 1) % philo->p->nb_philos;
-	if (philo->id % 2)
-	{
-		philo->fork[0] = (philo->id + 1) % philo->p->nb_philos;
-		philo->fork[1] = philo->id;
-	}
+	philo->fork[LEFT] = philo->p->forks[philo->id];
+	philo->fork[RIGHT] = philo->p->forks[(philo->id + 1) / philo->p->nb_philos];
 }
 
-static t_philo	**init_philos(t_prog *p)
+static t_philo	*init_philos(t_prog *p)
 {
-	t_philo	**philos;
+	t_philo	*philos;
 	int		i;
 
-	philos = (t_philo **)malloc(sizeof(t_philo *) * p->nb_philos);
+	philos = (t_philo *)malloc(sizeof(t_philo) * p->nb_philos);
 	if (!philos)
 		return (NULL);
 	i = 0;
 	while (i < p->nb_philos)
 	{
-		philos[i] = malloc(sizeof(t_philo));
-		if (!philos[i])
+		if (pthread_mutex_init(&philos[i].meal_lock, NULL))
+		{
+			error_message("failed to init meal mutexphilos.");
 			return (NULL);
-		if (pthread_mutex_init(&philos[i]->meal_lock, NULL))
-			return (NULL);
-		philos[i]->id = i + 1;
-		philos[i]->last_meal = 0;
-		philos[i]->time_ate = 0;
-		philos[i]->p = p;
-		assign_forks(philos[i]);
+		}
+		philos[i].id = i + 1;
+		philos[i].last_meal = 0;
+		philos[i].time_ate = 0;
+		philos[i].p = p;
+		assign_forks(&philos[i]);
 		i++;
 	}
 	return (philos);
@@ -71,11 +66,11 @@ int	init_mutexes(t_prog *p)
 {
 	p->forks = init_forks(p);
 	if (!p->forks)
-		return (-1);
+		return (error_message("failed to init the forks."));
 	if (pthread_mutex_init(&p->stop_m, NULL))
-		return (-1);
+		return (error_message("failed to init stop mutex"));
 	if (pthread_mutex_init(&p->write_m, NULL))
-		return (-1);
+		return (error_message("failed to init write mutex"));
 	return (0);
 }
 
@@ -94,10 +89,10 @@ t_prog	*init_program(int argc, char **argv)
 	p->stop = false;
 	if (argc - 1 == 5)
 		p->nb_meal = ft_atoi(argv[5]);
+	if (init_mutexes(p))
+		return (NULL);
 	p->philos = init_philos(p);
 	if (!p->philos)
-		return (NULL);
-	if (init_mutexes(p))
 		return (NULL);
 	return (p);
 }

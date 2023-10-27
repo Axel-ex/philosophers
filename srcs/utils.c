@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:43:41 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/24 22:04:07 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 12:08:50 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_atoi(char *s)
 	return (res * sign);
 }
 
-long int	get_time(void)
+long	get_time(void)
 {
 	struct timeval	curr_time;
 	long int		time;

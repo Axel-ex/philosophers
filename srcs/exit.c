@@ -6,30 +6,30 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:02:03 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/24 15:29:01 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 12:09:51 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	*error_msg(char *msg)
+int	error_message(char *msg)
 {
-	printf("Error: %s", msg);
-	return (NULL);
+	printf("Error: %s\n", msg);
+	return (EXIT_FAILURE);
 }
 
-void	*join_threads(t_prog *p)
+int	join_threads(t_prog *p)
 {
 	int	i;
 
 	i = 0;
 	while (i < p->nb_philos)
 	{
-		if (pthread_join(p->philos[i]->thread, NULL))
-			return (error_msg("failed to join the thread"));
+		if (pthread_join(p->philos[i].thread, NULL))
+			return (error_message("failed to join the thread"));
 		i++;
 	}
-	return (p);
+	return (0);
 }
 
 void	destroy_mutexes(t_prog *p)
@@ -43,27 +43,15 @@ void	destroy_mutexes(t_prog *p)
 	pthread_mutex_destroy(&p->write_m);
 }
 
-void	free_prog(t_prog *p)
+void	exit_program(t_prog	*p)
 {
-	int	i;
-
 	if (!p)
 		return ;
-	i = -1;
+	join_threads(p);
+	destroy_mutexes(p);
 	if (p->philos)
-	{
-		while (++i < p->nb_philos)
-			free(p->philos[i]);
 		free(p->philos);
-	}
 	if (p->forks)
 		free(p->forks);
 	free(p);
-}
-
-void	exit_program(t_prog	*p)
-{
-	join_threads(p);
-	destroy_mutexes(p);
-	free_prog(p);
 }

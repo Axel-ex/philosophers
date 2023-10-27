@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:28:03 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/24 22:05:45 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/27 12:10:41 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static	bool	start_routine(t_prog *p)
 	i = 0;
 	while (i < p->nb_philos)
 	{
-		if (pthread_create(&p->philos[i]->thread, NULL,
-				routine, p->philos[i]))
+		if (pthread_create(&p->philos[i].thread, NULL,
+				routine, &p->philos[i]))
 			return (false);
 		i++;
 	}
@@ -36,11 +36,12 @@ int	main(int argc, char **argv)
 	t_prog	*p;
 
 	if (parse_argv(argc, argv))
-		return (-1);
+		return (EXIT_FAILURE);
 	p = init_program(argc, argv);
 	if (!p)
-		return (-1);
+		return (error_message("Program initialization failed"));
 	if (!start_routine(p))
-		return (-1);
+		return (error_message("Routine failed to start"));
 	exit_program(p);
+	return (EXIT_SUCCESS);
 }
