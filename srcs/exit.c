@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:02:03 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/27 18:53:54 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:00:33 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ void	destroy_mutexes(t_prog *p)
 
 	i = -1;
 	while (++i < p->nb_philos)
+	{
 		pthread_mutex_destroy(&p->forks[i]);
-	pthread_mutex_destroy(&p->stop_m);
+		pthread_mutex_destroy(&p->philos[i].philo_m);
+	}
+	pthread_mutex_destroy(&p->prog_m);
 	pthread_mutex_destroy(&p->write_m);
 }
 

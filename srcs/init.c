@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:34:42 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/27 17:02:58 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:57:22 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static t_philo	*init_philos(t_prog *p)
 	i = 0;
 	while (i < p->nb_philos)
 	{
-		if (pthread_mutex_init(&philos[i].meal_lock, NULL))
+		if (pthread_mutex_init(&philos[i].philo_m, NULL))
 		{
-			error_message("failed to init meal mutexes.");
+			error_message("Failed to init philo mutexes.\n");
 			return (NULL);
 		}
 		philos[i].id = i + 1;
@@ -70,8 +70,8 @@ int	init_mutexes(t_prog *p)
 	p->forks = init_forks(p);
 	if (!p->forks)
 		return (error_message("failed to init the forks."));
-	if (pthread_mutex_init(&p->stop_m, NULL))
-		return (error_message("failed to init stop mutex"));
+	if (pthread_mutex_init(&p->prog_m, NULL))
+		return (error_message("failed to init program mutex"));
 	if (pthread_mutex_init(&p->write_m, NULL))
 		return (error_message("failed to init write mutex"));
 	return (0);
