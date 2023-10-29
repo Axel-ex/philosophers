@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:30 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/29 15:38:28 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 21:22:20 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	think(t_philo *philo)
 	pthread_mutex_unlock(&philo->philo_m);
 	if (time_to_think < 0)
 		time_to_think = 0;
-	else if (time_to_think > 600)
-		time_to_think = 200;
 	write_status(philo, THINK, DEBUG);
 	philo_sleep(philo->p, time_to_think);
 }
@@ -35,10 +33,12 @@ void	eat_sleep_think(t_philo *philo)
 	write_status(philo, FORK1, DEBUG);
 	pthread_mutex_lock(&philo->p->forks[philo->fork[RIGHT]]);
 	write_status(philo, FORK2, DEBUG);
+	pthread_mutex_lock(&philo->philo_m);
+	philo->last_meal = get_time();
+	pthread_mutex_unlock(&philo->philo_m);
 	write_status(philo, EAT, DEBUG);
 	philo_sleep(philo->p, philo->p->time_to_eat);
 	pthread_mutex_lock(&philo->philo_m);
-	philo->last_meal = get_time();
 	philo->time_ate++;
 	pthread_mutex_unlock(&philo->philo_m);
 	pthread_mutex_unlock(&philo->p->forks[philo->fork[LEFT]]);

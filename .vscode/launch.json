@@ -5,9 +5,9 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
-      "args": ["2", "310", "200", "200"],
-      "cwd": "/Users/Axel/Desktop/Ecole_42/philo/",
-      "program": "/Users/Axel/Desktop/Ecole_42/philo/philo"
+      "args": [],
+      "cwd": "/Users/Axel/Desktop/Ecole_42/philosophers/srcs",
+      "program": "/Users/Axel/Desktop/Ecole_42/philosophers/srcs/build/Debug/outDebug"
     }
   ]
 }

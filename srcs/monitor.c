@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:34:21 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/29 15:19:38 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 21:32:30 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ void	*monitor(void *data)
 		return (NULL);
 	wait_threads(p->start);
 	while (!end_of_routine(p))
-		continue ;
+		usleep(1000);
 	return (NULL);
 }
