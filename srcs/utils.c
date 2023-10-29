@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:43:41 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/29 12:45:18 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 15:06:46 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,17 @@ long	get_time(void)
 	return (time);
 }
 
-void	ft_usleep(long int time_in_ms)
+void	philo_sleep(t_prog *p, time_t sleep_time)
 {
-	long int	start;
+	time_t	wake_up;
 
-	start = get_time();
-	while ((get_time() - start) < time_in_ms)
-		usleep(time_in_ms / 10);
+	wake_up = get_time() + sleep_time;
+	while (get_time() < wake_up)
+	{
+		if (is_finished(p))
+			break ;
+		usleep(100);
+	}
 }
 
 void	write_status(t_philo *philo, t_status status, bool debug)

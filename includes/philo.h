@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:12:02 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/29 13:24:47 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 14:59:59 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ int			error_message(char *msg);
 bool		is_finished(t_prog *p);
 //DEBUG.C
 void		write_status_debug(t_philo *philo, t_status status, char *msg);
+void		philo_sleep(t_prog *p, time_t sleep_time);
 
 #endif
