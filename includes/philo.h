@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:12:02 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/29 13:16:52 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:24:47 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				id;
 	int				fork[2];
-	bool			full;
 	time_t			time_ate;
 	time_t			last_meal;
 	pthread_mutex_t	philo_m;

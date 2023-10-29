@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:30 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/29 13:18:43 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:25:05 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	*routine(void *data)
 	if (philo->id % 2 != 0)
 		ft_usleep(philo->p->time_to_sleep);
 	while (!is_finished(philo->p))
-		if (!philo->full)
-			eat_sleep_think(philo);
+		eat_sleep_think(philo);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:34:21 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/29 13:10:30 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:27:29 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ bool	end_of_routine(t_prog *p)
 			return (true);
 		}
 		if (p->nb_meal != -1 && p->philos[i].time_ate
-			<= p->nb_meal)
+			< p->nb_meal)
 			all_full = false;
 		pthread_mutex_unlock(&p->philos[i].philo_m);
 	}

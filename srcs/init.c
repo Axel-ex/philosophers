@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:34:42 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/29 13:17:36 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:24:53 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static t_philo	*init_philos(t_prog *p)
 		philos[i].last_meal = 0;
 		philos[i].time_ate = 0;
 		philos[i].p = p;
-		philos->full = false;
 		assign_forks(&philos[i], i);
 	}
 	return (philos);
