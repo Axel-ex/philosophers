@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:28:03 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/28 15:49:48 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:38:06 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,20 @@ static	bool	start_routine(t_prog *p)
 {
 	int	i;
 
-	p->start = get_time();
-	i = 0;
-	while (i < p->nb_philos)
+	p->start = get_time() + (p->nb_philos * 20);
+	i = -1;
+	while (++i < p->nb_philos)
 	{
 		if (pthread_create(&p->philos[i].thread, NULL,
 				routine, &p->philos[i]))
 			return (false);
-		setter(&p->philos[i].last_meal, p->start, &p->philos[i].philo_m);
-		i++;
+		pthread_mutex_lock(&p->philos[i].philo_m);
+		p->philos[i].last_meal = p->start;
+		pthread_mutex_unlock(&p->philos[i].philo_m);
 	}
-	if (pthread_create(&p->monitor, NULL, monitor, p))
-		return (false);
+	if (p->nb_philos > 1)
+		if (pthread_create(&p->monitor, NULL, monitor, p))
+			return (false);
 	return (true);
 }
 

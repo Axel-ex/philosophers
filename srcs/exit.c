@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:02:03 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/28 15:00:33 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:39:13 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	exit_program(t_prog	*p)
 	if (!p)
 		return ;
 	join_threads(p);
-	pthread_detach(p->monitor);
+	if (p->nb_philos > 1)
+		pthread_detach(p->monitor);
 	destroy_mutexes(p);
 	if (p->philos)
 		free(p->philos);

@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:34:21 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/28 16:00:37 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:10:30 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,43 +21,57 @@ void	set_finished_flag(t_prog *p, bool value)
 
 bool	is_finished(t_prog *p)
 {
-	return (getter(p->stop, &p->prog_m));
+	bool	res;
+
+	res = false;
+	pthread_mutex_lock(&p->prog_m);
+	if (p->stop)
+		res = true;
+	pthread_mutex_unlock(&p->prog_m);
+	return (res);
 }
 
-void	is_dead(t_prog *p)
+bool	is_dead(t_philo *philo)
 {
-	int		i;
 	time_t	elapsed;
-	time_t	curr_time;
 
-	i = -1;
-	curr_time = get_time();
-	while (++i < getter(p->nb_philos, &p->prog_m))
+	elapsed = get_time() - philo->last_meal;
+	if (elapsed > philo->p->time_to_die)
 	{
-		elapsed = curr_time - getter(p->philos[i].last_meal, &p->philos[i].philo_m);
-		if (elapsed > getter(p->time_to_die, &p->prog_m) && !is_finished(p))
-		{
-			write_status(&p->philos[i], DIED, DEBUG);
-			set_finished_flag(p, true);
-		}
+		write_status(philo, DIED, DEBUG);
+		set_finished_flag(philo->p, true);
+		pthread_mutex_unlock(&philo->philo_m);
+		return (true);
 	}
+	return (false);
 }
 
-void	all_full(t_prog *p)
+bool	end_of_routine(t_prog *p)
 {
 	int		i;
 	bool	all_full;
 
 	i = -1;
 	all_full = true;
-	while (++i < getter(p->nb_philos, &p->prog_m))
+	while (++i < p->nb_philos)
 	{
-		if (getter(p->philos[i].time_ate, &p->philos[i].philo_m)
-			< getter(p->nb_meal, &p->prog_m))
+		pthread_mutex_lock(&p->philos[i].philo_m);
+		if (is_dead(&p->philos[i]))
+		{
+			set_finished_flag(p, true);
+			return (true);
+		}
+		if (p->nb_meal != -1 && p->philos[i].time_ate
+			<= p->nb_meal)
 			all_full = false;
+		pthread_mutex_unlock(&p->philos[i].philo_m);
 	}
-	if (all_full && !is_finished(p))
+	if (p->nb_meal != -1 && all_full)
+	{
 		set_finished_flag(p, true);
+		return (true);
+	}
+	return (false);
 }
 
 void	*monitor(void *data)
@@ -67,11 +81,8 @@ void	*monitor(void *data)
 	p = (t_prog *)data;
 	if (p->nb_meal == 0)
 		return (NULL);
-	ft_usleep(p->time_to_die);
-	while (!is_finished(p))
-	{
-		is_dead(p);
-		all_full(p);
-	}
+	wait_threads(p->start);
+	while (!end_of_routine(p))
+		ft_usleep(100);
 	return (NULL);
 }

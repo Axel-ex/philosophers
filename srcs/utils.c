@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:43:41 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/28 13:30:15 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:45:18 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	write_status(t_philo *philo, t_status status, bool debug)
 	long int	curr_time;
 	char		*msg;
 
+	if (is_finished(philo->p))
+		return ;
 	if (status == FORK1 || status == FORK2)
 		msg = "has taken a fork";
 	else if (status == EAT)
@@ -82,4 +84,10 @@ void	write_status(t_philo *philo, t_status status, bool debug)
 	else if (debug)
 		write_status_debug(philo, status, msg);
 	pthread_mutex_unlock(&philo->p->write_m);
+}
+
+void	wait_threads(time_t start)
+{
+	while (get_time() < start)
+		;
 }

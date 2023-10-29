@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:12:02 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/28 14:57:19 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:16:52 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				id;
 	int				fork[2];
-	long			time_ate;
+	bool			full;
+	time_t			time_ate;
 	time_t			last_meal;
 	pthread_mutex_t	philo_m;
 	t_prog			*p;
@@ -86,8 +87,7 @@ int			ft_atoi(char *s);
 long		get_time(void);
 void		ft_usleep(long int time_in_ms);
 void		write_status(t_philo *philo, t_status status, bool debug);
-long		getter(int philo_info, pthread_mutex_t *mutex);
-
+void		wait_threads(time_t start);
 //ROUTINE
 void		*routine(void *data);
 
@@ -105,8 +105,5 @@ int			error_message(char *msg);
 bool		is_finished(t_prog *p);
 //DEBUG.C
 void		write_status_debug(t_philo *philo, t_status status, char *msg);
-
-//SET_GET.C
-void		setter(long *to_set, long to_set_with, pthread_mutex_t *mutex);
 
 #endif

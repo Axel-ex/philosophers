@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:34:42 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/28 15:57:22 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:17:36 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static t_philo	*init_philos(t_prog *p)
 	philos = (t_philo *)malloc(sizeof(t_philo) * p->nb_philos);
 	if (!philos)
 		return (NULL);
-	i = 0;
-	while (i < p->nb_philos)
+	i = -1;
+	while (++i < p->nb_philos)
 	{
 		if (pthread_mutex_init(&philos[i].philo_m, NULL))
 		{
@@ -59,8 +59,8 @@ static t_philo	*init_philos(t_prog *p)
 		philos[i].last_meal = 0;
 		philos[i].time_ate = 0;
 		philos[i].p = p;
+		philos->full = false;
 		assign_forks(&philos[i], i);
-		i++;
 	}
 	return (philos);
 }
