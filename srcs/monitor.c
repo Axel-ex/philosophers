@@ -6,18 +6,11 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:34:21 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/29 21:32:30 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/30 11:52:20 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-void	set_finished_flag(t_prog *p, bool value)
-{
-	pthread_mutex_lock(&p->prog_m);
-	p->stop = value;
-	pthread_mutex_unlock(&p->prog_m);
-}
 
 bool	is_finished(t_prog *p)
 {
@@ -31,7 +24,14 @@ bool	is_finished(t_prog *p)
 	return (res);
 }
 
-bool	is_dead(t_philo *philo)
+static void	set_finished_flag(t_prog *p, bool value)
+{
+	pthread_mutex_lock(&p->prog_m);
+	p->stop = value;
+	pthread_mutex_unlock(&p->prog_m);
+}
+
+static bool	is_dead(t_philo *philo)
 {
 	time_t	elapsed;
 
@@ -46,7 +46,7 @@ bool	is_dead(t_philo *philo)
 	return (false);
 }
 
-bool	end_of_routine(t_prog *p)
+static bool	end_of_routine(t_prog *p)
 {
 	int		i;
 	bool	all_full;

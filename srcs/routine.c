@@ -6,13 +6,13 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:30 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/29 21:22:20 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/30 11:46:50 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	think(t_philo *philo)
+static void	think(t_philo *philo)
 {
 	time_t	time_to_think;
 
@@ -24,10 +24,10 @@ void	think(t_philo *philo)
 	if (time_to_think < 0)
 		time_to_think = 0;
 	write_status(philo, THINK, DEBUG);
-	philo_sleep(philo->p, time_to_think);
+	sleep_philo(philo->p, time_to_think);
 }
 
-void	eat_sleep_think(t_philo *philo)
+static void	eat_sleep_think(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->p->forks[philo->fork[LEFT]]);
 	write_status(philo, FORK1, DEBUG);
@@ -37,20 +37,20 @@ void	eat_sleep_think(t_philo *philo)
 	philo->last_meal = get_time();
 	pthread_mutex_unlock(&philo->philo_m);
 	write_status(philo, EAT, DEBUG);
-	philo_sleep(philo->p, philo->p->time_to_eat);
+	sleep_philo(philo->p, philo->p->time_to_eat);
 	pthread_mutex_lock(&philo->philo_m);
 	philo->time_ate++;
 	pthread_mutex_unlock(&philo->philo_m);
 	pthread_mutex_unlock(&philo->p->forks[philo->fork[LEFT]]);
 	pthread_mutex_unlock(&philo->p->forks[philo->fork[RIGHT]]);
-	philo_sleep(philo->p, philo->p->time_to_sleep);
+	sleep_philo(philo->p, philo->p->time_to_sleep);
 	write_status(philo, SLEEP, DEBUG);
 }
 
-void	philo_alone(t_philo *philo)
+static void	philo_alone(t_philo *philo)
 {
 	write_status(philo, FORK1, DEBUG);
-	philo_sleep(philo->p, philo->p->time_to_die);
+	sleep_philo(philo->p, philo->p->time_to_die);
 	write_status(philo, DIED, DEBUG);
 }
 

@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:34:42 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/29 13:24:53 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/10/30 11:49:14 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_philo	*init_philos(t_prog *p)
 	return (philos);
 }
 
-int	init_mutexes(t_prog *p)
+static int	init_mutexes(t_prog *p)
 {
 	p->forks = init_forks(p);
 	if (!p->forks)
