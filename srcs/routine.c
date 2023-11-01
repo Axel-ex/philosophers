@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:30 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/30 11:46:50 by achabrer         ###   ########.fr       */
+/*   Updated: 2023/11/01 10:18:27 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	think(t_philo *philo)
 	pthread_mutex_unlock(&philo->philo_m);
 	if (time_to_think < 0)
 		time_to_think = 0;
+	if (time_to_think > 800)
+		time_to_think = 200;
 	write_status(philo, THINK, DEBUG);
 	sleep_philo(philo->p, time_to_think);
 }

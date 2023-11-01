@@ -15,7 +15,7 @@ The program will then display the actions executed by the philosophers and simul
 
 # Implementation
 Here, each philosopher is represented by a thread, and a supplementary thread is constently checking on them to see if all of them ate enough or if one of them died.
-The key idea here was to create mutexes to avoid [data races](https://www.geeksforgeeks.org/race-condition-vulnerability/) occuring when threads (running simultaneously) are trying to write in memory while other threads try to read that memory space. The idea was to create three mutexes:
+The key idea here was to create [mutexes](https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/) to avoid [data races](https://www.geeksforgeeks.org/race-condition-vulnerability/) occuring when threads (running simultaneously) are trying to write in memory while other threads try to read that memory space. The idea was to create three mutexes:
 - A mutex **write_m** locking the access to stdout (philos trying to access stdout simultaniously)
 - A mutex **prog_m** locking the access to data contained in t_prog (monitor trying to write to stop flag while philos are trying to read it's value to know if the simulation ended).
 - Mutexes **philo_m** locking the access to data contained in t_philo (philos writing the time of their last meal and the number of time they ate while the monitor routine checks for those values to know when to stop the routine)
