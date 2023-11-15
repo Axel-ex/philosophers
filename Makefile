@@ -27,7 +27,7 @@ $(OBJ_DIR)/%.o: srcs/%.c | $(OBJ_DIR)
 all: $(NAME)
 	@echo "$(GREEN)$(NAME) executable created$(RESET)"
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ)
 	@cc $(FLAGS) -I $(INC) $(OBJ) $(LIBFT) -o $(NAME)
 
 $(OBJ_DIR):
