@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:12:02 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/30 11:54:08 by achabrer         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:38:16 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,5 +207,8 @@ void		sleep_philo(t_prog *p, time_t sleep_time);
  * @param msg to print
  */
 void		write_status_debug(t_philo *philo, t_status status, char *msg);
+
+bool	take_fork(t_philo *philo);
+void	drop_fork(t_philo *philo);
 
 #endif

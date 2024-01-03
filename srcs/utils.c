@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:43:41 by achabrer          #+#    #+#             */
-/*   Updated: 2023/10/30 11:50:26 by achabrer         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:13:10 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,9 @@ int	ft_atoi(char *s)
 long	get_time(void)
 {
 	struct timeval	curr_time;
-	long int		time;
 
-	if (gettimeofday(&curr_time, NULL) != 0)
-		return (0);
-	time = (curr_time.tv_sec * 1000) + (curr_time.tv_usec / 1000);
-	return (time);
+	gettimeofday(&curr_time, NULL);
+	return ((curr_time.tv_sec * 1000) + (curr_time.tv_usec / 1000));
 }
 
 void	sleep_philo(t_prog *p, time_t sleep_time)
@@ -77,7 +74,7 @@ void	write_status(t_philo *philo, t_status status, bool debug)
 	else if (status == THINK)
 		msg = "is thinking";
 	else if (status == DIED)
-		msg = "has died";
+		msg = "died";
 	pthread_mutex_lock(&philo->p->write_m);
 	curr_time = get_time();
 	if (!debug)
