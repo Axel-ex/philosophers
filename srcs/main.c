@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:28:03 by achabrer          #+#    #+#             */
-/*   Updated: 2024/01/03 15:16:51 by achabrer         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:57:17 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static	bool	start_routine(t_prog *p)
 {
 	int	i;
 
-	p->start = get_time() + (p->nb_philos * 20);
+	p->start = get_time() + (p->nb_philos * 10);
 	i = -1;
 	while (++i < p->nb_philos)
 	{
