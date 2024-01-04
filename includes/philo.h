@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:12:02 by achabrer          #+#    #+#             */
-/*   Updated: 2024/01/04 09:44:15 by achabrer         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:21:49 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 #  define DEBUG false
 # endif
 
-# define STD_ERR_USAGE "Usage: <number of philo> <time to die> <time to sleep>\
- <time to think> <nb of meal>"
+# define STD_ERR_USAGE "Usage: <number of philo> <time to die> <time to eat>\
+ <time to sleep> <nb of meal>"
 
 typedef enum s_status
 {
