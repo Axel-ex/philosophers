@@ -6,19 +6,29 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 12:20:25 by achabrer          #+#    #+#             */
-/*   Updated: 2024/01/03 14:48:15 by achabrer         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:43:45 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-bool	take_fork(t_philo *philo)
+void	take_fork(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->p->forks[philo->fork[LEFT]]);
-	write_status(philo, FORK1, DEBUG);
-	pthread_mutex_lock(&philo->p->forks[philo->fork[RIGHT]]);
-	write_status(philo, FORK2, DEBUG);
-	return (true);
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(&philo->p->forks[philo->fork[LEFT]]);
+		write_status(philo, FORK1, DEBUG);
+		pthread_mutex_lock(&philo->p->forks[philo->fork[RIGHT]]);
+		write_status(philo, FORK2, DEBUG);
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->p->forks[philo->fork[RIGHT]]);
+		write_status(philo, FORK2, DEBUG);
+		pthread_mutex_lock(&philo->p->forks[philo->fork[LEFT]]);
+		write_status(philo, FORK1, DEBUG);
+	}
+
 }
 
 void	drop_fork(t_philo *philo)
