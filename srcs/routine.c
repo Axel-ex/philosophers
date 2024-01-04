@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:30 by achabrer          #+#    #+#             */
-/*   Updated: 2024/01/04 10:30:22 by achabrer         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:22:42 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,10 @@ void	*routine(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
+	wait_threads(philo->p->start);
 	pthread_mutex_lock(&philo->philo_m);
 	philo->last_meal = philo->p->start;
 	pthread_mutex_unlock(&philo->philo_m);
-	wait_threads(philo->p->start);
-	if (!philo->p->time_to_die)
-		return (NULL);
 	if (philo->p->nb_philos == 1)
 	{
 		philo_alone(philo);
