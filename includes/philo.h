@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:12:02 by achabrer          #+#    #+#             */
-/*   Updated: 2024/01/04 10:21:49 by achabrer         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:49:32 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,20 @@ void		sleep_philo(t_prog *p, time_t sleep_time);
  */
 void		write_status_debug(t_philo *philo, t_status status, char *msg);
 
-void	take_fork(t_philo *philo);
-void	drop_fork(t_philo *philo);
+//FORKS.C
+/**
+ * @brief lock fork mutexes in different order depending on the philo id
+ * to avoid potential deadlocks.
+ * 
+ * @param philo 
+ */
+void		take_fork(t_philo *philo);
+
+/**
+ * @brief unlock fork mutexes.
+ * 
+ * @param philo 
+ */
+void		drop_fork(t_philo *philo);
 
 #endif

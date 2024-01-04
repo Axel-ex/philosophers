@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 12:20:25 by achabrer          #+#    #+#             */
-/*   Updated: 2024/01/04 09:43:45 by achabrer         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:50:10 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	take_fork(t_philo *philo)
 		pthread_mutex_lock(&philo->p->forks[philo->fork[LEFT]]);
 		write_status(philo, FORK1, DEBUG);
 	}
-
 }
 
 void	drop_fork(t_philo *philo)

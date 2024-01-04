@@ -6,7 +6,7 @@
 /*   By: achabrer <achabrer@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:23:30 by achabrer          #+#    #+#             */
-/*   Updated: 2024/01/04 11:22:42 by achabrer         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:50:26 by achabrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	philo_alone(t_philo *philo)
 	sleep_philo(philo->p, philo->p->time_to_die);
 	write_status(philo, DIED, DEBUG);
 }
-
 
 void	*routine(void *data)
 {
