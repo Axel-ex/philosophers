@@ -9,7 +9,7 @@ the program is executed as so:
 ./philo <nb_philos> <time_to_die> <time_to_eat> <time_to_sleep> (optional) <nb_of_meal_to_eat>
 ```
 
-<img src="make_demo.gif" width="100%"/>
+<img src="demo.gif" width="100%"/>
 
 The program will then display the actions executed by the philosophers and simulation will stop once one philosopher will die, once all of them will have eat enough (if nb_of_meal_to_eat is specified), or will never stop if `time_to_die` > `time_to_eat` + `time_to_eat`.
 
