@@ -20,3 +20,14 @@ The key idea here was to create [mutexes](https://www.geeksforgeeks.org/mutex-lo
 - A mutex **prog_m** locking the access to data contained in t_prog (monitor trying to write to stop flag while philos are trying to read it's value to know if the simulation ended).
 - Mutexes **philo_m** locking the access to data contained in t_philo (philos writing the time of their last meal and the number of time they ate while the monitor routine checks for those values to know when to stop the routine)
 As so, everytime that a ressource is accessed, the corresponding mutex is locked before and then unlocked.
+
+# Norme
+
+All 42 projects must be written following the **Norme**.
+
+	- No for, do while, switch, case or goto are allowed
+	- No more than 25 lines per function and 5 functions per file
+	- No assigns and declarations in the same line (unless static)
+ 	- Each line must be at most 80 columns wide, comments included
+	- A function can take 4 named parameters maximum
+	- No more than 5 variables in 1 function
